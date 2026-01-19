@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#A8C5DA">
     <title>Unrot Your Brain</title>
-    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Brain Rehab&quot;,&quot;short_name&quot;:&quot;BrainRehab&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%231a1a2e&quot;,&quot;theme_color&quot;:&quot;%231a1a2e&quot;}">
+    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Brain Rehab&quot;,&quot;short_name&quot;:&quot;BrainRehab&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%23A8C5DA&quot;,&quot;theme_color&quot;:&quot;%23A8C5DA&quot;}">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,104 +23,272 @@
         }
 
         :root {
-            --bg-dark: #1a1a2e;
-            --bg-card: #16213e;
-            --bg-card-hover: #1f2b47;
-            --accent: #e94560;
-            --accent-glow: rgba(233, 69, 96, 0.3);
-            --text: #eee;
-            --text-muted: #8892b0;
-            --success: #64ffda;
-            --warning: #ffd93d;
+            --bg-primary: #A8C5DA;
+            --bg-secondary: #B8D1E3;
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFC;
+            --accent-black: #1A1A1A;
+            --accent-pink: #F5B8D1;
+            --accent-magenta: #E879B9;
+            --accent-orange: #F6A661;
+            --accent-blue: #6B9FD4;
+            --accent-mint: #7DD3C0;
+            --text-primary: #1A1A1A;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --border-light: rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             padding-bottom: 100px;
         }
 
+        /* Header */
         .header {
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
-            padding: 24px 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(233, 69, 96, 0.2);
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--accent), #ff6b9d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header .subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .streak-banner {
-            background: linear-gradient(90deg, var(--accent), #ff6b9d);
-            padding: 12px 20px;
+            background: var(--bg-primary);
+            padding: 16px 20px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .streak-item {
-            text-align: center;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .streak-number {
-            font-size: 1.5rem;
-            font-weight: 800;
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.1rem;
         }
 
-        .streak-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .greeting {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .greeting-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .greeting-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-right {
+            position: relative;
+        }
+
+        .notification-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .notification-btn i {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+        }
+
+        /* Search Bar */
+        .search-container {
+            padding: 0 20px 16px;
+        }
+
+        .search-bar {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-bar i {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Hero Card */
+        .hero-card {
+            margin: 0 20px 20px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .hero-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-icon i {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .hero-progress {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .hero-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--accent-black);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero-btn:active {
+            transform: scale(0.98);
+        }
+
+        .hero-illustration {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 120px;
+            height: 120px;
             opacity: 0.9;
         }
 
-        .nav-tabs {
+        /* Category Pills */
+        .category-pills {
             display: flex;
-            background: var(--bg-card);
-            padding: 8px;
-            gap: 8px;
-            position: sticky;
-            top: 73px;
-            z-index: 99;
+            gap: 10px;
+            padding: 0 20px 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        .nav-tab {
-            flex: 1;
-            padding: 12px 8px;
+        .category-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            background: var(--bg-card);
+            border-radius: 30px;
             border: none;
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
+            box-shadow: var(--shadow-sm);
         }
 
-        .nav-tab.active {
-            background: var(--accent);
+        .category-pill.active {
+            background: var(--accent-black);
             color: white;
         }
 
+        .category-pill i {
+            font-size: 1.1rem;
+        }
+
+        .category-pill span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Content */
         .content {
-            padding: 16px;
+            padding: 0 20px;
         }
 
         .section {
@@ -125,13 +299,21 @@
             display: block;
         }
 
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Day Selector */
         .day-selector {
             display: flex;
             gap: 8px;
+            margin-bottom: 20px;
             overflow-x: auto;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
             scrollbar-width: none;
+            padding-bottom: 4px;
         }
 
         .day-selector::-webkit-scrollbar {
@@ -139,55 +321,104 @@
         }
 
         .day-btn {
-            min-width: 50px;
+            min-width: 52px;
             padding: 12px 8px;
-            border: 2px solid var(--bg-card);
+            border: 2px solid transparent;
             background: var(--bg-card);
-            color: var(--text-muted);
-            border-radius: 12px;
+            color: var(--text-secondary);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
+            box-shadow: var(--shadow-sm);
         }
 
         .day-btn.active {
-            border-color: var(--accent);
-            color: var(--text);
+            background: var(--accent-black);
+            color: white;
         }
 
         .day-btn.completed {
-            background: rgba(100, 255, 218, 0.1);
-            border-color: var(--success);
+            background: linear-gradient(135deg, var(--accent-mint), var(--success));
+            color: white;
+            border-color: transparent;
         }
 
         .day-btn .day-num {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
 
         .day-btn .day-label {
             font-size: 0.65rem;
             text-transform: uppercase;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* Motivation Card */
+        .motivation-card {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-magenta));
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .motivation-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .motivation-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .motivation-card .author {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Task Cards */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .task-card {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid transparent;
+            border-radius: 20px;
+            padding: 18px;
+            border: 2px solid transparent;
             transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
         }
 
         .task-card.completed {
             border-color: var(--success);
-            background: rgba(100, 255, 218, 0.05);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(125, 211, 192, 0.05));
         }
 
         .task-header {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 14px;
         }
 
         .task-checkbox {
@@ -204,16 +435,21 @@
             margin-top: 2px;
         }
 
+        .task-checkbox:hover {
+            border-color: var(--success);
+        }
+
         .task-checkbox.checked {
             background: var(--success);
             border-color: var(--success);
         }
 
         .task-checkbox.checked::after {
-            content: '✓';
-            color: var(--bg-dark);
-            font-weight: 700;
-            font-size: 14px;
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
         }
 
         .task-content {
@@ -224,213 +460,117 @@
             font-weight: 600;
             font-size: 1rem;
             margin-bottom: 4px;
+            color: var(--text-primary);
         }
 
         .task-card.completed .task-title {
             text-decoration: line-through;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .task-desc {
             font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.4;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         .task-time {
-            display: inline-block;
-            background: rgba(233, 69, 96, 0.2);
-            color: var(--accent);
-            padding: 4px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 10px;
+        }
+
+        .task-time i {
+            font-size: 0.85rem;
+        }
+
+        /* Colored Task Cards (varied) */
+        .task-card:nth-child(3n+1) {
+            background: linear-gradient(135deg, #FFF8F0, #FFFFFF);
+        }
+
+        .task-card:nth-child(3n+2) {
+            background: linear-gradient(135deg, #F0F8FF, #FFFFFF);
+        }
+
+        .task-card:nth-child(3n) {
+            background: linear-gradient(135deg, #FFF0F8, #FFFFFF);
+        }
+
+        .task-card.completed:nth-child(n) {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(125, 211, 192, 0.05));
+        }
+
+        /* Progress Section */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .progress-ring-wrapper {
+            position: relative;
+            margin-bottom: 24px;
         }
 
         .progress-ring {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            width: 160px;
+            height: 160px;
+            transform: rotate(-90deg);
         }
 
         .progress-ring circle {
             fill: none;
-            stroke-width: 8;
+            stroke-width: 12;
+            stroke-linecap: round;
         }
 
         .progress-ring .bg {
-            stroke: var(--bg-card);
+            stroke: var(--bg-secondary);
         }
 
         .progress-ring .progress {
-            stroke: var(--accent);
-            stroke-linecap: round;
-            transform: rotate(-90deg);
-            transform-origin: center;
+            stroke: url(#progressGradient);
             transition: stroke-dashoffset 0.5s ease;
         }
 
-        .progress-text {
-            text-anchor: middle;
-            fill: var(--text);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .progress-label {
-            text-anchor: middle;
-            fill: var(--text-muted);
-            font-size: 0.6rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 16px;
+        .progress-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
         }
 
-        .stat-value {
-            font-size: 1.8rem;
+        .progress-percent {
+            font-size: 2.5rem;
             font-weight: 800;
-            color: var(--accent);
+            color: var(--text-primary);
         }
 
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .journal-entry {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .journal-date {
+        .progress-label {
             font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 8px;
-            font-weight: 600;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        .journal-textarea {
-            width: 100%;
-            background: var(--bg-dark);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 14px;
-            color: var(--text);
-            font-size: 0.95rem;
-            resize: none;
-            min-height: 120px;
-            font-family: inherit;
-            line-height: 1.5;
-        }
-
-        .journal-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .journal-prompt {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-
-        .save-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: transform 0.1s;
-        }
-
-        .save-btn:active {
-            transform: scale(0.98);
-        }
-
-        .ideas-list {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .ideas-list h3 {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            color: var(--accent);
-        }
-
-        .idea-item {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .idea-item:last-child {
-            border-bottom: none;
-        }
-
-        .reset-btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .motivation-card {
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2), rgba(255, 107, 157, 0.1));
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(233, 69, 96, 0.3);
-        }
-
-        .motivation-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            font-style: italic;
-            color: var(--text);
-        }
-
-        .motivation-card .author {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-style: normal;
-        }
-
+        /* Weekly Overview */
         .weekly-overview {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
             background: var(--bg-card);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
         }
 
         .week-day {
@@ -439,33 +579,440 @@
         }
 
         .week-day .dot {
-            width: 24px;
-            height: 24px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: var(--bg-dark);
-            margin: 0 auto 6px;
+            background: var(--bg-primary);
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            transition: all 0.2s;
         }
 
         .week-day .dot.completed {
-            background: var(--success);
+            background: linear-gradient(135deg, var(--accent-mint), var(--success));
+            color: white;
         }
 
         .week-day .dot.today {
-            border: 2px solid var(--accent);
+            border: 3px solid var(--accent-black);
         }
 
         .week-day .label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:nth-child(1) {
+            background: linear-gradient(135deg, var(--accent-pink), rgba(245, 184, 209, 0.3));
+        }
+
+        .stat-card:nth-child(2) {
+            background: linear-gradient(135deg, var(--accent-orange), rgba(246, 166, 97, 0.3));
+        }
+
+        .stat-card:nth-child(3) {
+            background: linear-gradient(135deg, var(--accent-blue), rgba(107, 159, 212, 0.3));
+        }
+
+        .stat-card:nth-child(4) {
+            background: linear-gradient(135deg, var(--accent-mint), rgba(125, 211, 192, 0.3));
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .stat-icon i {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Reset Button */
+        .reset-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 2px solid var(--text-muted);
+            color: var(--text-secondary);
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .reset-btn:hover {
+            border-color: #EF4444;
+            color: #EF4444;
+        }
+
+        /* Journal Section */
+        .journal-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+
+        .journal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .journal-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-magenta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .journal-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .journal-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .journal-day {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .journal-prompt {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--bg-primary);
+            border-radius: 16px;
+            line-height: 1.5;
+        }
+
+        .journal-textarea {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 16px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            resize: none;
+            min-height: 140px;
+            font-family: inherit;
+            line-height: 1.6;
+            transition: border-color 0.2s;
+        }
+
+        .journal-textarea:focus {
+            outline: none;
+            border-color: var(--accent-magenta);
+        }
+
+        .journal-textarea::placeholder {
             color: var(--text-muted);
         }
 
+        .save-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-black);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: transform 0.1s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .save-btn:active {
+            transform: scale(0.98);
+        }
+
+        .save-btn.saved {
+            background: var(--success);
+        }
+
+        /* Past Journal Entries */
+        .past-entry {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .past-entry-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .past-entry-day {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-magenta);
+        }
+
+        .past-entry-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Ideas Section */
+        .ideas-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ideas-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .ideas-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ideas-icon.brain {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-magenta));
+        }
+
+        .ideas-icon.book {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-mint));
+        }
+
+        .ideas-icon.hobby {
+            background: linear-gradient(135deg, var(--accent-orange), #FFD93D);
+        }
+
+        .ideas-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .ideas-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .idea-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .idea-item:last-child {
+            border-bottom: none;
+        }
+
+        .idea-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-magenta);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .idea-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            padding: 12px 20px 24px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 24px 24px 0 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 16px;
+        }
+
+        .nav-item.active {
+            background: var(--bg-primary);
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .nav-item.active i {
+            color: var(--text-primary);
+        }
+
+        .nav-item span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .nav-item.active span {
+            color: var(--text-primary);
+        }
+
+        /* Streak Banner */
+        .streak-banner {
+            background: var(--bg-card);
+            margin: 0 20px 20px;
+            border-radius: 20px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .streak-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .streak-item:not(:last-child) {
+            border-right: 1px solid var(--border-light);
+        }
+
+        .streak-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .streak-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Illustration SVG */
+        .illustration {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Popsy-style illustration placeholder */
+        .popsy-illustration {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        /* Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Live indicator */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            50% { opacity: 0.5; }
         }
 
         .live-indicator {
@@ -477,15 +1024,319 @@
             margin-right: 6px;
             animation: pulse 2s infinite;
         }
+
+        /* Task day theme heading */
+        .day-theme {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .day-theme-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent-orange), #FFD93D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .day-theme-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .day-theme-text h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .day-theme-text span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <div class="header">
-        <h1>🧠 Unrot Your Brain</h1>
-        <div class="subtitle">7-Day Rehabilitation Challenge</div>
+        <div class="header-left">
+            <div class="avatar">
+                <i class="ph ph-brain"></i>
+            </div>
+            <div class="greeting">
+                <span class="greeting-text">Hello, Friend</span>
+                <span class="greeting-subtitle">Level Up Your Mind</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="notification-btn">
+                <i class="ph ph-bell"></i>
+            </button>
+            <div class="notification-dot"></div>
+        </div>
     </div>
 
-    <div class="streak-banner">
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-bar">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" placeholder="Search tasks, ideas...">
+        </div>
+    </div>
+
+    <!-- Hero Card -->
+    <div class="hero-card" id="heroCard">
+        <div class="hero-card-header">
+            <div class="hero-icon">
+                <i class="ph ph-brain"></i>
+            </div>
+            <span class="hero-progress" id="heroProgress">Day 1/7</span>
+        </div>
+        <h2 class="hero-title">7-Day Brain Rehab</h2>
+        <p class="hero-subtitle">Unrot Your Brain Challenge</p>
+        <button class="hero-btn" onclick="switchToToday()">
+            START NOW
+            <i class="ph ph-arrow-right"></i>
+        </button>
+        <!-- Popsy-style illustration inline SVG -->
+        <svg class="hero-illustration float-animation" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="80" fill="#F0F4FF" opacity="0.5"/>
+            <ellipse cx="100" cy="140" rx="50" ry="10" fill="#E0E7FF" opacity="0.3"/>
+            <path d="M70 80C70 80 75 60 100 60C125 60 130 80 130 80" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="80" cy="90" r="8" fill="#1A1A1A"/>
+            <circle cx="120" cy="90" r="8" fill="#1A1A1A"/>
+            <circle cx="82" cy="88" r="3" fill="white"/>
+            <circle cx="122" cy="88" r="3" fill="white"/>
+            <path d="M90 110C90 110 100 120 110 110" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+            <path d="M60 70C60 70 50 50 70 40" stroke="#F5B8D1" stroke-width="4" stroke-linecap="round"/>
+            <path d="M140 70C140 70 150 50 130 40" stroke="#A8C5DA" stroke-width="4" stroke-linecap="round"/>
+            <path d="M55 85L45 80M145 85L155 80" stroke="#F6A661" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="65" cy="55" r="5" fill="#7DD3C0"/>
+            <circle cx="135" cy="55" r="5" fill="#E879B9"/>
+            <rect x="85" y="45" width="30" height="8" rx="4" fill="#6B9FD4"/>
+        </svg>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-pills">
+        <button class="category-pill active" data-section="today">
+            <i class="ph-fill ph-lightning"></i>
+            <span>Today</span>
+        </button>
+        <button class="category-pill" data-section="progress">
+            <i class="ph ph-chart-line-up"></i>
+            <span>Progress</span>
+        </button>
+        <button class="category-pill" data-section="journal">
+            <i class="ph ph-notebook"></i>
+            <span>Journal</span>
+        </button>
+        <button class="category-pill" data-section="ideas">
+            <i class="ph ph-lightbulb"></i>
+            <span>Ideas</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- TODAY SECTION -->
+        <div class="section active" id="today">
+            <div class="day-selector" id="daySelector"></div>
+
+            <div class="day-theme" id="dayTheme">
+                <div class="day-theme-icon">
+                    <i class="ph ph-rocket-launch"></i>
+                </div>
+                <div class="day-theme-text">
+                    <h3 id="dayThemeTitle">Digital Detox Begins</h3>
+                    <span>Day 1 of 7</span>
+                </div>
+            </div>
+
+            <div class="motivation-card">
+                <p id="dailyQuote">"Your brain isn't broken. You haven't peaked. It's still in there—that sharp, curious, wide-eyed version of you."</p>
+                <div class="author">— Remember who you were</div>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+        </div>
+
+        <!-- PROGRESS SECTION -->
+        <div class="section" id="progress">
+            <div class="progress-container">
+                <div class="progress-ring-wrapper">
+                    <svg class="progress-ring" viewBox="0 0 160 160">
+                        <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#E879B9"/>
+                                <stop offset="100%" stop-color="#7DD3C0"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="bg" cx="80" cy="80" r="68"/>
+                        <circle class="progress" id="progressCircle" cx="80" cy="80" r="68"
+                            stroke-dasharray="427.3" stroke-dashoffset="427.3"/>
+                    </svg>
+                    <div class="progress-center">
+                        <div class="progress-percent" id="progressPercent">0%</div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weekly-overview" id="weeklyOverview"></div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ph ph-device-mobile-slash"></i>
+                    </div>
+                    <div class="stat-value" id="phoneFreeHours">0</div>
+                    <div class="stat-label">Phone-Free Hours</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ph ph-cloud"></i>
+                    </div>
+                    <div class="stat-value" id="boredMinutes">0</div>
+                    <div class="stat-label">Boredom Minutes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ph ph-pencil-line"></i>
+                    </div>
+                    <div class="stat-value" id="wordsWritten">0</div>
+                    <div class="stat-label">Words Written</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ph ph-book-open-text"></i>
+                    </div>
+                    <div class="stat-value" id="pagesRead">0</div>
+                    <div class="stat-label">Pages Read</div>
+                </div>
+            </div>
+
+            <button class="reset-btn" onclick="resetProgress()">
+                <i class="ph ph-arrow-counter-clockwise"></i>
+                Reset All Progress
+            </button>
+        </div>
+
+        <!-- JOURNAL SECTION -->
+        <div class="section" id="journal">
+            <div class="journal-card">
+                <div class="journal-header">
+                    <div class="journal-icon">
+                        <i class="ph ph-pencil-simple"></i>
+                    </div>
+                    <div>
+                        <div class="journal-date" id="journalDate">Day 1</div>
+                        <div class="journal-day" id="journalDateFull">January 19</div>
+                    </div>
+                </div>
+                <div class="journal-prompt" id="journalPrompt">What made you feel mentally sharp or curious today? What did you notice about your attention?</div>
+                <textarea class="journal-textarea" id="journalText" placeholder="Write your thoughts here..."></textarea>
+                <button class="save-btn" onclick="saveJournal()">
+                    <i class="ph ph-floppy-disk"></i>
+                    Save Entry
+                </button>
+            </div>
+
+            <div id="pastEntries"></div>
+        </div>
+
+        <!-- IDEAS SECTION -->
+        <div class="section" id="ideas">
+            <div class="motivation-card" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-mint));">
+                <p>Pick something that fascinates you. Not for grades or productivity—just for the thrill of learning.</p>
+            </div>
+
+            <div class="ideas-card">
+                <div class="ideas-header">
+                    <div class="ideas-icon brain">
+                        <i class="ph ph-target"></i>
+                    </div>
+                    <h3 class="ideas-title">Brain Exercise Ideas</h3>
+                </div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Listen to a philosophy podcast while walking</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Rewatch a childhood movie and analyze it</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Learn a new word and use it in a sentence</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Handwrite a letter to someone (or yourself)</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Memorize a poem</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Learn the capitals of every country</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Create a mini book club with one friend</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Pick a side in a debate—then argue the opposite</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Rewrite a fairytale from a villain's POV</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Read the footnotes of a nonfiction book</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Watch a TED Talk and summarize it in your words</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Take a walk without your phone—just walk</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Do something manually without media</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Write down 10 questions you don't know the answer to</div></div>
+                <div class="idea-item"><div class="idea-bullet"></div><div class="idea-text">Make something that won't be posted anywhere</div></div>
+            </div>
+
+            <div class="ideas-card">
+                <div class="ideas-header">
+                    <div class="ideas-icon book">
+                        <i class="ph ph-books"></i>
+                    </div>
+                    <h3 class="ideas-title">Reading Challenge</h3>
+                </div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-blue);"></div><div class="idea-text">One fiction book</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-blue);"></div><div class="idea-text">One nonfiction book</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-blue);"></div><div class="idea-text">One re-read (a favorite)</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-blue);"></div><div class="idea-text">One wildcard (random pick)</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-blue);"></div><div class="idea-text">One deep-dive into something niche</div></div>
+            </div>
+
+            <div class="ideas-card">
+                <div class="ideas-header">
+                    <div class="ideas-icon hobby">
+                        <i class="ph ph-palette"></i>
+                    </div>
+                    <h3 class="ideas-title">Focus Hobbies to Try</h3>
+                </div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Learn a language (Duolingo, books)</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Play an instrument</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Knit or crochet something</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Start a small garden</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Build something with your hands</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Cook without a recipe</div></div>
+                <div class="idea-item"><div class="idea-bullet" style="background: var(--accent-orange);"></div><div class="idea-text">Sketch or paint</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-section="today">
+            <i class="ph-fill ph-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item" data-section="progress">
+            <i class="ph ph-chart-pie-slice"></i>
+            <span>Progress</span>
+        </button>
+        <button class="nav-item" data-section="journal">
+            <i class="ph ph-note-pencil"></i>
+            <span>Journal</span>
+        </button>
+        <button class="nav-item" data-section="ideas">
+            <i class="ph ph-lightbulb-filament"></i>
+            <span>Ideas</span>
+        </button>
+    </nav>
+
+    <!-- Streak Banner (positioned after search in DOM but shown conditionally) -->
+    <div class="streak-banner" id="streakBanner" style="display: none;">
         <div class="streak-item">
             <div class="streak-number" id="currentStreak">0</div>
             <div class="streak-label">Day Streak</div>
@@ -500,124 +1351,12 @@
         </div>
     </div>
 
-    <div class="nav-tabs">
-        <button class="nav-tab active" data-section="today">Today</button>
-        <button class="nav-tab" data-section="progress">Progress</button>
-        <button class="nav-tab" data-section="journal">Journal</button>
-        <button class="nav-tab" data-section="ideas">Ideas</button>
-    </div>
-
-    <div class="content">
-        <!-- TODAY SECTION -->
-        <div class="section active" id="today">
-            <div class="day-selector" id="daySelector"></div>
-
-            <div class="motivation-card">
-                <p id="dailyQuote">"Your brain isn't broken. You haven't peaked. It's still in there—that sharp, curious, wide-eyed version of you."</p>
-                <div class="author">— Remember who you were</div>
-            </div>
-
-            <div id="taskList"></div>
-        </div>
-
-        <!-- PROGRESS SECTION -->
-        <div class="section" id="progress">
-            <svg class="progress-ring" viewBox="0 0 120 120">
-                <circle class="bg" cx="60" cy="60" r="52"/>
-                <circle class="progress" id="progressCircle" cx="60" cy="60" r="52"
-                    stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
-                <text class="progress-text" x="60" y="58" id="progressPercent">0%</text>
-                <text class="progress-label" x="60" y="72">COMPLETE</text>
-            </svg>
-
-            <div class="weekly-overview" id="weeklyOverview"></div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" id="phoneFreeHours">0</div>
-                    <div class="stat-label">Phone-Free Hours</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="boredMinutes">0</div>
-                    <div class="stat-label">Boredom Minutes</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="wordsWritten">0</div>
-                    <div class="stat-label">Words Written</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="pagesRead">0</div>
-                    <div class="stat-label">Pages Read</div>
-                </div>
-            </div>
-
-            <button class="reset-btn" onclick="resetProgress()">Reset All Progress</button>
-        </div>
-
-        <!-- JOURNAL SECTION -->
-        <div class="section" id="journal">
-            <div class="journal-entry">
-                <div class="journal-date" id="journalDate">Day 1 - January 19</div>
-                <div class="journal-prompt" id="journalPrompt">What made you feel mentally sharp or curious today? What did you notice about your attention?</div>
-                <textarea class="journal-textarea" id="journalText" placeholder="Write your thoughts here..."></textarea>
-                <button class="save-btn" onclick="saveJournal()">Save Entry</button>
-            </div>
-
-            <div id="pastEntries"></div>
-        </div>
-
-        <!-- IDEAS SECTION -->
-        <div class="section" id="ideas">
-            <div class="motivation-card">
-                <p>Pick something that fascinates you. Not for grades or productivity—just for the thrill of learning.</p>
-            </div>
-
-            <div class="ideas-list">
-                <h3>🎯 Brain Exercise Ideas</h3>
-                <div class="idea-item">• Listen to a philosophy podcast while walking</div>
-                <div class="idea-item">• Rewatch a childhood movie and analyze it</div>
-                <div class="idea-item">• Learn a new word and use it in a sentence</div>
-                <div class="idea-item">• Handwrite a letter to someone (or yourself)</div>
-                <div class="idea-item">• Memorize a poem</div>
-                <div class="idea-item">• Learn the capitals of every country</div>
-                <div class="idea-item">• Create a mini book club with one friend</div>
-                <div class="idea-item">• Pick a side in a debate—then argue the opposite</div>
-                <div class="idea-item">• Rewrite a fairytale from a villain's POV</div>
-                <div class="idea-item">• Read the footnotes of a nonfiction book</div>
-                <div class="idea-item">• Watch a TED Talk and summarize it in your words</div>
-                <div class="idea-item">• Take a walk without your phone—just walk</div>
-                <div class="idea-item">• Do something manually without media</div>
-                <div class="idea-item">• Write down 10 questions you don't know the answer to</div>
-                <div class="idea-item">• Make something that won't be posted anywhere</div>
-            </div>
-
-            <div class="ideas-list" style="margin-top: 16px;">
-                <h3>📚 Reading Challenge</h3>
-                <div class="idea-item">• One fiction book</div>
-                <div class="idea-item">• One nonfiction book</div>
-                <div class="idea-item">• One re-read (a favorite)</div>
-                <div class="idea-item">• One wildcard (random pick)</div>
-                <div class="idea-item">• One deep-dive into something niche</div>
-            </div>
-
-            <div class="ideas-list" style="margin-top: 16px;">
-                <h3>🎨 Focus Hobbies to Try</h3>
-                <div class="idea-item">• Learn a language (Duolingo, books)</div>
-                <div class="idea-item">• Play an instrument</div>
-                <div class="idea-item">• Knit or crochet something</div>
-                <div class="idea-item">• Start a small garden</div>
-                <div class="idea-item">• Build something with your hands</div>
-                <div class="idea-item">• Cook without a recipe</div>
-                <div class="idea-item">• Sketch or paint</div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // Data structure
         const dailyTasks = [
             { // Day 1
                 theme: "Digital Detox Begins",
+                icon: "device-mobile-slash",
                 quote: "Step away from the infinite scroll. Let your brain remember how to think without being spoon-fed.",
                 tasks: [
                     { id: 'd1t1', title: "3-Hour Phone Fast", desc: "No phone for 3 consecutive hours. Put it in another room.", time: "3 hrs" },
@@ -630,6 +1369,7 @@
             },
             { // Day 2
                 theme: "Embrace the Stillness",
+                icon: "moon-stars",
                 quote: "You don't need to be entertained every second. Let yourself sit in silence.",
                 tasks: [
                     { id: 'd2t1', title: "Morning Without Phone", desc: "First hour of your day: no phone. Make coffee, stretch, just be.", time: "1 hr" },
@@ -642,6 +1382,7 @@
             },
             { // Day 3
                 theme: "Rediscover Curiosity",
+                icon: "magnifying-glass",
                 quote: "Pick a topic. Become obsessed. Just for the thrill of it.",
                 tasks: [
                     { id: 'd3t1', title: "Choose Your Fascination", desc: "Pick ONE topic you want to deep-dive into this week. Write it down.", time: "10 min" },
@@ -654,6 +1395,7 @@
             },
             { // Day 4
                 theme: "Reading Resurrection",
+                icon: "book-open",
                 quote: "Read like a kid again—greedy, curious, unselfconscious.",
                 tasks: [
                     { id: 'd4t1', title: "Library Trip or Book Hunt", desc: "Go to a library or find that book you've been meaning to read.", time: "30 min" },
@@ -666,6 +1408,7 @@
             },
             { // Day 5
                 theme: "Hands & Focus",
+                icon: "hand-grabbing",
                 quote: "Give your brain something real to touch. Something with friction. With error.",
                 tasks: [
                     { id: 'd5t1', title: "Start a Hands-On Project", desc: "Cooking, knitting, building, drawing—something tactile.", time: "30 min" },
@@ -678,6 +1421,7 @@
             },
             { // Day 6
                 theme: "Mental Play",
+                icon: "puzzle-piece",
                 quote: "Sit with a question, really sit with it, without reaching for a distraction.",
                 tasks: [
                     { id: 'd6t1', title: "Big Question Session", desc: "Write down 5 questions you don't know the answer to. Sit with them.", time: "20 min" },
@@ -690,6 +1434,7 @@
             },
             { // Day 7
                 theme: "Reclaim Your Mind",
+                icon: "trophy",
                 quote: "Your brain is still yours. Unrot it. Reclaim it. Wake it back up.",
                 tasks: [
                     { id: 'd7t1', title: "Complete Your Project", desc: "Finish your mini-paper, craft project, or whatever you started.", time: "45 min" },
@@ -741,16 +1486,52 @@
             renderJournal();
             updateStats();
             setupNavigation();
+            updateHeroCard();
+        }
+
+        // Switch to Today section
+        function switchToToday() {
+            document.querySelectorAll('.category-pill, .nav-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.section === 'today');
+            });
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('today').classList.add('active');
+        }
+
+        // Update Hero Card
+        function updateHeroCard() {
+            document.getElementById('heroProgress').textContent = `Day ${state.currentDay}/7`;
         }
 
         // Navigation
         function setupNavigation() {
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            const allNavItems = document.querySelectorAll('.category-pill, .nav-item');
+
+            allNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Update both pill and bottom nav active states
+                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+                    // Find matching elements and activate them
+                    const section = item.dataset.section;
+                    document.querySelectorAll(`[data-section="${section}"]`).forEach(el => {
+                        el.classList.add('active');
+                    });
+
+                    // Show the section
                     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                    tab.classList.add('active');
-                    document.getElementById(tab.dataset.section).classList.add('active');
+                    document.getElementById(section).classList.add('active');
+
+                    // Update bottom nav icons
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        const icon = nav.querySelector('i');
+                        if (nav.dataset.section === section) {
+                            icon.className = icon.className.replace('ph ph-', 'ph-fill ph-');
+                        } else {
+                            icon.className = icon.className.replace('ph-fill ph-', 'ph ph-');
+                        }
+                    });
                 });
             });
         }
@@ -759,9 +1540,6 @@
         function renderDaySelector() {
             const container = document.getElementById('daySelector');
             container.innerHTML = '';
-
-            const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-            const today = new Date().getDay();
 
             for (let i = 1; i <= 7; i++) {
                 const dayCompleted = isDayCompleted(i);
@@ -789,6 +1567,7 @@
             renderDaySelector();
             renderTasks();
             renderJournal();
+            updateHeroCard();
         }
 
         // Render tasks
@@ -796,8 +1575,13 @@
             const dayData = dailyTasks[state.currentDay - 1];
             document.getElementById('dailyQuote').textContent = `"${dayData.quote}"`;
 
+            // Update day theme
+            document.getElementById('dayThemeTitle').textContent = dayData.theme;
+            document.querySelector('.day-theme-text span').textContent = `Day ${state.currentDay} of 7`;
+            document.querySelector('.day-theme-icon i').className = `ph ph-${dayData.icon}`;
+
             const container = document.getElementById('taskList');
-            container.innerHTML = `<h3 style="margin-bottom: 16px; color: var(--accent);">Day ${state.currentDay}: ${dayData.theme}</h3>`;
+            container.innerHTML = '';
 
             dayData.tasks.forEach(task => {
                 const completed = state.completedTasks[task.id];
@@ -809,7 +1593,10 @@
                         <div class="task-content">
                             <div class="task-title">${task.title}</div>
                             <div class="task-desc">${task.desc}</div>
-                            <span class="task-time">${task.time}</span>
+                            <span class="task-time">
+                                <i class="ph ph-clock"></i>
+                                ${task.time}
+                            </span>
                         </div>
                     </div>
                 `;
@@ -855,7 +1642,7 @@
             const completed = Object.values(state.completedTasks).filter(v => v).length;
             const percent = Math.round((completed / totalTasks) * 100);
 
-            const circumference = 2 * Math.PI * 52;
+            const circumference = 2 * Math.PI * 68;
             const offset = circumference - (percent / 100) * circumference;
 
             document.getElementById('progressCircle').style.strokeDashoffset = offset;
@@ -876,7 +1663,7 @@
                 const div = document.createElement('div');
                 div.className = 'week-day';
                 div.innerHTML = `
-                    <div class="dot ${completed ? 'completed' : ''} ${isToday ? 'today' : ''}">${completed ? '✓' : ''}</div>
+                    <div class="dot ${completed ? 'completed' : ''} ${isToday ? 'today' : ''}">${completed ? '<i class="ph-bold ph-check" style="font-size: 14px;"></i>' : i}</div>
                     <div class="label">${dayLabels[i-1]}</div>
                 `;
                 container.appendChild(div);
@@ -897,7 +1684,8 @@
             const date = new Date();
             date.setDate(date.getDate() + state.currentDay - 1);
 
-            document.getElementById('journalDate').textContent = `Day ${state.currentDay} - ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`;
+            document.getElementById('journalDate').textContent = `Day ${state.currentDay}`;
+            document.getElementById('journalDateFull').textContent = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
             document.getElementById('journalPrompt').textContent = dayData.prompt;
             document.getElementById('journalText').value = state.journals[state.currentDay] || '';
 
@@ -908,10 +1696,13 @@
             Object.keys(state.journals).sort((a, b) => b - a).forEach(day => {
                 if (parseInt(day) !== state.currentDay && state.journals[day]) {
                     const entry = document.createElement('div');
-                    entry.className = 'journal-entry';
+                    entry.className = 'past-entry';
                     entry.innerHTML = `
-                        <div class="journal-date">Day ${day}</div>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">${state.journals[day]}</p>
+                        <div class="past-entry-header">
+                            <i class="ph ph-calendar-blank" style="color: var(--accent-magenta);"></i>
+                            <span class="past-entry-day">Day ${day}</span>
+                        </div>
+                        <p class="past-entry-text">${state.journals[day]}</p>
                     `;
                     pastContainer.appendChild(entry);
                 }
@@ -933,11 +1724,11 @@
 
             // Visual feedback
             const btn = document.querySelector('.save-btn');
-            btn.textContent = '✓ Saved!';
-            btn.style.background = 'var(--success)';
+            btn.innerHTML = '<i class="ph ph-check-circle"></i> Saved!';
+            btn.classList.add('saved');
             setTimeout(() => {
-                btn.textContent = 'Save Entry';
-                btn.style.background = 'var(--accent)';
+                btn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save Entry';
+                btn.classList.remove('saved');
             }, 1500);
         }
 
